@@ -1,0 +1,10 @@
+version: "3.0"
+services:
+  app:
+    container_name: "r_sudo_ELYZA-japanese-Llama-2-7b"
+    build:
+      context: "."
+      dockerfile: ./docker/python/Dockerfile
+    volumes:
+      - .:/opt
+    tty: true
