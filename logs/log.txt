@@ -1,0 +1,2 @@
+2023/12/21
+dockerでELYZA-japanese-Llama-2-7bを使えるようにしてみる。
