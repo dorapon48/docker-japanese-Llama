@@ -1,2 +1,6 @@
 2023/12/21
 dockerでELYZA-japanese-Llama-2-7bを使えるようにしてみる。
+huggingface-hubとやらからダウンロードしてみる
+elyza/ELYZA-japanese-Llama-2-7b-fast-instruct
+ダウンロードと最適化を行ったやつを別イメージで作成し、完成したggufファイルをコピーするのがよさそう
+とりあえず必要そうなものはそろったか？
