@@ -1,3 +1,18 @@
+FROM ubuntu:20.04 AS downloader
+
+# huggingfaceからダウンロード
+WORKDIR /download
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive/%g" /etc/apt/sources.list
+
+RUN apt-get update \
+    && apt-get -y install python3 python3-pip
+RUN pip install huggingface-hub
+
+COPY download.py .
+RUN python3 download.py
+
+
 FROM nvidia/cuda:12.0.0-cudnn8-devel-ubuntu20.04
 
 ARG BASE_PATH=/app
@@ -6,25 +21,26 @@ ARG BASE_PATH=/app
 WORKDIR $BASE_PATH
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-# 日本のミラーサイトに変更
+# 日本のミラーサイトに変更(iij)
 RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive/%g" /etc/apt/sources.list
 
-RUN apt-get update
-RUN apt-get -y install cmake git python3 python3-pip
+RUN apt-get update \
+    && apt-get -y install cmake git python3 python3-pip
 
 ARG CMAKE_ARGS="-DLLAMA_CUBLAS=on" 
 ARG FORCE_CMAKE=1
-RUN pip install llama-cpp-python huggingface-hub
+RUN pip install llama-cpp-python
 
 # llama.cppを準備
-WORKDIR $BASE_PATH
+WORKDIR /opt
 RUN git clone https://github.com/ggerganov/llama.cpp.git
-WORKDIR $BASE_PATH/llama.cpp/
+WORKDIR /opt/llama.cpp
 RUN make LLAMA_CUBLAS=1
 RUN pip install -r requirements.txt
 
-# huggingfaceからダウンロード
-# WORKDIR $BASE_PATH
-# RUN python3 download.py
-# RUN pip install huggingface-hub
-# RUN python3 llama.cpp/convert.py ELYZA-model --outfile ELYZA-model.gguf
+# ダウンロードしたモデルを量子化
+WORKDIR /opt
+COPY --from=downloader /download/ELYZA-model /opt/ELYZA-model
+RUN python3 llama.cpp/convert.py ELYZA-model --outfile ELYZA-model.gguf
+
+WORKDIR $BASE_PATH
