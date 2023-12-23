@@ -4,3 +4,15 @@ huggingface-hubとやらからダウンロードしてみる
 elyza/ELYZA-japanese-Llama-2-7b-fast-instruct
 ダウンロードと最適化を行ったやつを別イメージで作成し、完成したggufファイルをコピーするのがよさそう
 とりあえず必要そうなものはそろったか？
+
+2023/12/22
+GPUを使うにはいろいろとめんどくさそうだったが、
+pytorchの何かがありそう
+
+2023/12/23
+おっもいんでnvidia/cuda:12.3.1-devel-ubuntu20.04を使う
+お、いろいろやってたら行けた
+とりあえず、nvidia/cuda:12.0.0-cudnn8-runtime-ubuntu20.04を使う、PCのcudaのバージョンと合わせた方がいいらしい
+少し低いバージョンを使えばいいのかも
+うまくいった！
+/optはnividiaが使うみたいなので/appに変更すること

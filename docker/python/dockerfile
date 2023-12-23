@@ -1,19 +1,35 @@
-FROM python:3.9.18
+FROM nvidia/cuda:12.0.0-cudnn8-devel-ubuntu20.04
 
-WORKDIR /opt/
+WORKDIR /app/
+
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive/%g" /etc/apt/sources.list
 
 RUN apt-get update
+RUN apt-get -y install cmake git python3 python3-pip
 
-RUN pip install huggingface-hub llama-cpp-python
+# RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+#     gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+#     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+#         sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+#         tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+# ARG distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+# RUN curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | apt-key add -
+# RUN curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | tee /etc/apt/sources.list.d/nvidia-docker.list
+# RUN apt-get update && apt-get install -y nvidia-container-toolkit
+
+# RUN pip install huggingface-hub llama-cpp-python
+ARG CMAKE_ARGS="-DLLAMA_CUBLAS=on" 
+ARG FORCE_CMAKE=1
+RUN pip install llama-cpp-python
 
 # huggingfaceからダウンロード
 # RUN python download.py
 
 # llama.cppを準備
 RUN git clone https://github.com/ggerganov/llama.cpp.git
-WORKDIR /opt/llama.cpp
-RUN make
+WORKDIR /app/llama.cpp
+RUN make LLAMA_CUBLAS=1
 RUN pip install -r requirements.txt
 
-
-RUN pip install llama-cpp-python
