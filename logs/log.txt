@@ -24,3 +24,7 @@ llama.cppとダウンロードは別にする
 マウントするには最新の注意を払おう
 ダウンロード系はoptに突っ込んどく
 dockerfileを書き換えるともうダウンロードが走ると考えていいのでしばらくコメントアウトしてもいいかもしれない
+
+2023/12/24
+/opt/llama.cpp/server -m /app/llama.cpp/models/llama-2-7b-chat.ggmlv3.q2_K.gguf -c 2048 --host localhost --port 30000
+サーバーを作るの面倒みたいねどうにかせねば

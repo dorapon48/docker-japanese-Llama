@@ -8,6 +8,8 @@ services:
     volumes:
       - .:/app
     tty: true
+    ports:
+      - 30000:30000
     deploy:
       resources:
         reservations:
