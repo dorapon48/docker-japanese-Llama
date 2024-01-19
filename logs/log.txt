@@ -28,3 +28,17 @@ dockerfileを書き換えるともうダウンロードが走ると考えてい�
 2023/12/24
 /opt/llama.cpp/server -m /app/llama.cpp/models/llama-2-7b-chat.ggmlv3.q2_K.gguf -c 2048 --host localhost --port 30000
 サーバーを作るの面倒みたいねどうにかせねば
+
+2023/01/18
+pythonのバージョンが古い可能性がある
+ちがうっぽい
+llama-cpp-pythonのバージョンを下げたらいけた
+dekita!
+ポートのエラーが出ていたが、0.0.0.0に設定することでlocalhostでつながるようになった
+python3 -m llama_cpp.server --model llama.cpp/models/llama-2-7b-chat.ggmlv3.q2_K.gguf
+Llama.cppをダウンロードする必要がなくなったためdownloaderの方で処理してからと思ったが、
+そもそも処理済みのものがあるらしいのでそれを持ってきた方が楽
+と思ったがちょっと怖いので真面目にする
+
+2023/01/19
+全てを1つのdockerファイルでやるのは無理があると思うので、ダウンロード専用のdockerfileを作成する

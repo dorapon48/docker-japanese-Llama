@@ -7,9 +7,11 @@ services:
       dockerfile: ./docker/python/Dockerfile
     volumes:
       - .:/app
+      - downloadmodel:/opt/ELYZA-model
+      - ggufmodel:/app/model
     tty: true
     ports:
-      - 30000:30000
+      - 8000:8000
     deploy:
       resources:
         reservations:
@@ -17,3 +19,7 @@ services:
               - driver: nvidia
                 device_ids: ['0']
                 capabilities: [gpu]
+
+volumes:
+  downloadmodel:
+  ggufmodel:
