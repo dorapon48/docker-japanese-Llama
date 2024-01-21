@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
 # ディレクトリ作成
-echo "test"
 mkdir /data/download
 mkdir /data/models
 
-cd /data/download
-cat /download/download.py > test.txt
+cd /download
 
-# python3 download.py
+source ./.env
+
+if [ ! -e /data/download/ELYZA-model ];then 
+    python3 download.py $hf_model_id $hf_model_file_name
+    # mv ELYZA-model /data/download
+    mv $hf_model_file_name /data/download
+fi
+
+# python3 /opt/llama.cpp/convert.py --input ELYZA-model --output ELYZA-model.gguf

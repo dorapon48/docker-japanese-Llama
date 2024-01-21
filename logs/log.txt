@@ -47,3 +47,10 @@ shファイルにまとめることでbuild時間を少なくしているらし�
 ...マウントしているところにコピーするのはやめよう
 動作をdownloadディレクトリですることにした
 shファイルの一番上の部分は、#!/usr/bin/env bashにしておくのが無難
+
+2023/01/21
+convert.pyの処理がうまくいかない
+どうも、tokenizer.modelが見当たらないほかのelyzaのやつには入っているのでそれが問題かも
+elyza/ELYZA-japanese-Llama-2-7b-fast-instruct、elyza/ELYZA-japanese-Llama-2-7b-fastには入っていない
+elyza/ELYZA-japanese-Llama-2-7b-instructで試してみる
+.envファイルを用意して、ダウンロードを制御する
