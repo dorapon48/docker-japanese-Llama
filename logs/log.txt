@@ -54,3 +54,4 @@ convert.pyの処理がうまくいかない
 elyza/ELYZA-japanese-Llama-2-7b-fast-instruct、elyza/ELYZA-japanese-Llama-2-7b-fastには入っていない
 elyza/ELYZA-japanese-Llama-2-7b-instructで試してみる
 .envファイルを用意して、ダウンロードを制御する
+fileサイズが大きすぎるので、通信環境がいいとこでやる

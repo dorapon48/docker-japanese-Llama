@@ -20,7 +20,7 @@ RUN pip install -r requirements.txt
 WORKDIR /download
 COPY . /download
 RUN chmod +x /download/download.sh
-#CMD [ "/download/download.sh" ]
+CMD [ "/download/download.sh" ]
 # RUN python3 download.py
 
 # # ELYZA-japanese-Llama-2-7b-fast-instructをguffファイル化する

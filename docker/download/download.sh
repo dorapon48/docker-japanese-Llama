@@ -8,7 +8,7 @@ cd /download
 
 source ./.env
 
-if [ ! -e /data/download/ELYZA-model ];then 
+if [ ! -e /data/download/$hf_model_file_name ];then 
     python3 download.py $hf_model_id $hf_model_file_name
     # mv ELYZA-model /data/download
     mv $hf_model_file_name /data/download
