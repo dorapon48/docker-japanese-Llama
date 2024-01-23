@@ -64,9 +64,9 @@ docker-compose --profile download up --build
 次は、mainの方
 
 2023/01/23
- curl -s -XPOST -H 'Content-Type: application/json' localhost:8000/v1/chat/completions -d '{"messages": [{"role": "user", "content": "Could you introduce yourself?"}]}'
- 実験
- curl -X 'POST' \
+curl -s -XPOST -H 'Content-Type: application/json' localhost:8000/v1/chat/completions -d '{"messages": [{"role": "user", "content": "Could you introduce yourself?"}]}'
+実験
+curl -X 'POST' \
   'http://localhost:8000/v1/chat/completions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
@@ -78,3 +78,14 @@ docker-compose --profile download up --build
     }
   ]
 }'
+linux版のcurlですること
+python3 -m llama_cpp.server --model /data/models/ELYZA-japanese-Llama-2-7b-instruct.gguf --n_gpu_layers -1
+--n_gpu_layers -1はgpuに合わせるんじゃなくて、全部gpuにぶち込むみたいな設定みたいね
+out of memね
+2で772.06MB
+大体
+モデルの大きさ / config.jsonのnum_hidden_layers = --n_gpu_layers 1
+が出る
+例12.55(GB) * 1024 / 32 = 401.6(MB)
+そして、ギリギリまで使おうとするとout of memしてしまうので、注意
+n_gpu_layersは.envファイルで帰れるようにしましょう
