@@ -55,3 +55,26 @@ elyza/ELYZA-japanese-Llama-2-7b-fast-instruct、elyza/ELYZA-japanese-Llama-2-7b-
 elyza/ELYZA-japanese-Llama-2-7b-instructで試してみる
 .envファイルを用意して、ダウンロードを制御する
 fileサイズが大きすぎるので、通信環境がいいとこでやる
+
+2023/01/22
+何とかなった
+docker-compose --profile download up --build
+でダウンロードできる
+.envファイルにhuggingfaceのidと、保存するファイルの名前を入力すれば動くはず
+次は、mainの方
+
+2023/01/23
+ curl -s -XPOST -H 'Content-Type: application/json' localhost:8000/v1/chat/completions -d '{"messages": [{"role": "user", "content": "Could you introduce yourself?"}]}'
+ 実験
+ curl -X 'POST' \
+  'http://localhost:8000/v1/chat/completions' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "messages": [
+    {
+      "content": "富士山は何メートル？",
+      "role": "user"
+    }
+  ]
+}'
