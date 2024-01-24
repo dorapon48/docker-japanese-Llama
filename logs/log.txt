@@ -98,3 +98,19 @@ outtypeで指定
 これでおっけいのはず
 ただ、gpuを最大限使うのはggufの形式ではないので、gtpqやawqを使ってみる方がいいかもしれない
 ただ、全部gpuに突っ込んだ時の挙動は試したことがないので要検証
+
+https://github.com/oobabooga/text-generation-webui?tab=readme-ov-file
+https://github.com/casper-hansen/AutoAWQ
+ちょっとawqを試してみる
+追加したもの
+git clone https://github.com/mit-han-lab/llm-awq
+apt-get install software-properties-common
+add-apt-repository ppa:deadsnakes/ppa -y
+apt-get install python3.10
+pip install --upgrade pip
+...なんだか意味不明の仕様になってるようだもう使わんautoawqで何とかする
+うーん...性能不足なのかプログラムがkillされる
+どうにもならんのでggufで進める
+
+CMD [ "bash", "/download/download.sh" ]
+ちゃんとbashを書いてないと動かないらしい

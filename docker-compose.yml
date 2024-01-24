@@ -1,14 +1,15 @@
 version: "3.0"
 services:
   download:
-    container_name: "r_sudo_ELYZA-japanese-Llama-2-7b_download"
+    container_name: "LLM_server_download"
     profiles: ["download"]
     build: ./docker/download/
     volumes:
       - ./data:/data
       - ./docker/download:/download
+    tty: true
   main:
-    container_name: "r_sudo_ELYZA-japanese-Llama-2-7b_main"
+    container_name: "LLM_server_main"
     profiles: ["main"]
     build: ./docker/main/
     volumes:

@@ -21,4 +21,4 @@ RUN pip install -r requirements.txt
 WORKDIR /download
 COPY . /download
 RUN chmod +x /download/download.sh
-CMD [ "/download/download.sh" ]
+CMD [ "bash", "/download/download.sh" ]
