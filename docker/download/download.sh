@@ -15,11 +15,11 @@ if [ ! -e /data/download/${hf_model_file_name} ];then
     mv ${hf_model_file_name} /data/download
 fi
 
-gguf_name=${hf_model_file_name}.gguf
+gguf_name=${hf_model_file_name}_${convert_outtype}.gguf
 
 # convert model
 cd /data/download
 if [ ! -e /data/models/${gguf_name} ];then 
-    python3 /opt/llama.cpp/convert.py ${hf_model_file_name}/ --outfile ${gguf_name}
+    python3 /opt/llama.cpp/convert.py ${hf_model_file_name}/ --outfile ${gguf_name} --outtype ${convert_outtype}
     mv ${gguf_name} /data/models
 fi
