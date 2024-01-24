@@ -6,12 +6,14 @@ services:
     build: ./docker/download/
     volumes:
       - ./data:/data
+      - ./docker/download:/download
   main:
     container_name: "r_sudo_ELYZA-japanese-Llama-2-7b_main"
     profiles: ["main"]
     build: ./docker/main/
     volumes:
       - ./data:/data
+      - ./docker/main:/app
     tty: true
     ports:
       - 8000:8000
