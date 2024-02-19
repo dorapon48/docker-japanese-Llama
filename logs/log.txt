@@ -114,3 +114,7 @@ pip install --upgrade pip
 
 CMD [ "bash", "/download/download.sh" ]
 ちゃんとbashを書いてないと動かないらしい
+
+2024/02/19
+使いやすいように変更する
+環境変数を減らした，あとlogを表示するように変更
