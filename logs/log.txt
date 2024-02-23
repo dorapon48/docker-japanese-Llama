@@ -120,3 +120,13 @@ CMD [ "bash", "/download/download.sh" ]
 環境変数を減らした，あとlogを表示するように変更
 優先ダウンロードを変更などした
 shに例外処理を追加
+
+2024/02/23
+https://note.com/yucco72/n/nbdc842d31cdd
+よりvocabを変更
+vocabをいじくってもできない...なんだろ
+--vocab-type bpeを使用すると動くかもしれぬ
+動かんと思ってたらなんか先にファイルを生成していたのが問題らしくなんかできた
+読み込みがめちゃめちゃ遅い問題、wslのhostへの読み込みが異常に遅いことが問題のようだ
+windowsめ
+何とかなったかな多分、calm2-7b-chatとELYZA-japanese-Llama-2-7b-instructは動いた
